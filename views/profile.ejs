@@ -1,0 +1,31 @@
+<% include ./partials/header %>
+      <div class="container d-flex mx-3 p-2">
+        <img height="140px" width="140px"  class="rounded-circle" src="<%= founduser.image %>" alt="">
+     <div class="content m-3">
+        <h2><%= founduser.username %></h2>
+        <h4>kuch karta he</h4>
+     </div>
+    </div>
+     <form action="/post" class="col-6 m-3" method="post">
+        <h3>Create Post</h3>
+        <hr>
+        <div class="form-floating">
+            <textarea class="form-control" name="post" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+            <label for="floatingTextarea">Comments</label>
+          </div>
+          <input type="submit" class="btn btn-primary my-3">
+     </form>
+     <div class="container m-3">
+    <% founduser.posts.forEach(function(post){ %>
+      <div class="card" style="width: 18rem;">
+        <img src="<%= founduser.image %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= founduser.username %></h5>
+          <p class="card-text"><%= post.data %></p>
+          <p class="card-text"><%= post.likes.length %> likes</p>
+          <a href="/like/<%= post._id %>" class="btn btn-primary">likes</a>
+        </div>
+      </div>
+   <% }) %>
+     </div>
+   <% include ./partials/footer %>

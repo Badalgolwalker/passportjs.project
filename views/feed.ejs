@@ -1,0 +1,15 @@
+<% include ./partials/header %>
+ <div class="container">
+  <% allpost.forEach(function(post){ %>
+    <div class="card" style="width: 18rem;">
+        <img src="<%= post.userid.image %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">@<%= post.userid.username %></h5>
+          <p class="card-text"><%= post.data %></p>
+          <p class="card-text"><%= post.likes.length %> likes</p>
+          <a href="/like/<%= post._id %>" class="btn btn-primary">likes</a>
+        </div>
+      </div>
+ <% }) %>
+ </div>
+ <% include ./partials/footer %>

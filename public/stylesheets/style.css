@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+  
+  html, body {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(rgba(5, 5, 133, 0.815),rgba(27, 27, 27, 0.829),rgba(2, 2, 61, 0.849),rgba(27, 45, 99, 0.87));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  .card{
+    height: 470px;
+    width: 350px;
+  background-color: #0000002c;
+    box-shadow: 3px 3px 20px 3px #929191;
+    border-radius: 15px;
+    border: 1px solid #858484;
+    padding-top: 0.3%;
+    overflow: hidden;
+  
+  }
+  img{
+    height: 100px;
+   width: 100px;
+   margin-left: 36%;
+   border-radius: 50px;
+  }
+  form{
+    padding-top: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+    
+  }
+  input{
+    padding: 9px 3%;
+    width: 85%;
+    color: #fff;
+    border: none;
+   box-shadow: 0 1px 1px 0 #bbb9b9;
+    background-color: transparent;
+    font-size: 1.3vw;
+  }
+  #su{
+    width: 50%;
+  }
+  
