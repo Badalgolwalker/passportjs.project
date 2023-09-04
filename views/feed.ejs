@@ -7,7 +7,7 @@
           <h5 class="card-title">@<%= post.userid.username %></h5>
           <p class="card-text"><%= post.data %></p>
           <p class="card-text"><%= post.likes.length %> likes</p>
-          <a href="/like/<%= post._id %>" class="btn btn-primary">likes</a>
+          <a href="/like/<%= post._id %>" class="btn <%= post.likes.indexOf(user._id) === -1 ? 'btn-primary' : 'btn-danger' %>"><%= post.likes.indexOf(user._id) === -1 ? "like" : "unlike" %></a>
         </div>
       </div>
  <% }) %>

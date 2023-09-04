@@ -81,11 +81,14 @@ router.get('/like/:postid', isLoggedIn, function (req, res, next) {
 });
 
 router.get('/feed', isLoggedIn ,function(req, res, next) {
+ userModel.findOne({username:req.session.passport.user})
+ .then(function(user){
   postModel.find()
-    .populate("userid")
-    .then(function(allpost) {
-      res.render("feed", { allpost })
-    })
+  .populate("userid")
+  .then(function(allpost) {
+    res.render("feed", { allpost,user })
+  })
+ })
 })
 
 router.get('/login', function(req, res, next) {
