@@ -7,12 +7,10 @@
   html, body {
   height: 100%;
   width: 100%;
-  background: linear-gradient(rgba(5, 5, 133, 0.815),rgba(27, 27, 27, 0.829),rgba(2, 2, 61, 0.849),rgba(27, 45, 99, 0.87));
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* background: linear-gradient(rgba(5, 5, 133, 0.815),rgba(27, 27, 27, 0.829),rgba(2, 2, 61, 0.849),rgba(27, 45, 99, 0.87)); */
+ 
   }
-  .card{
+  .crd{
     height: 470px;
     width: 350px;
   background-color: #0000002c;
@@ -21,15 +19,19 @@
     border: 1px solid #858484;
     padding-top: 0.3%;
     overflow: hidden;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   
   }
-  img{
+ .crd img{
     height: 100px;
    width: 100px;
    margin-left: 36%;
    border-radius: 50px;
   }
-  form{
+ .crd form{
     padding-top: 1%;
     display: flex;
     align-items: center;
@@ -38,10 +40,10 @@
     gap: 24px;
     
   }
-  input{
+ .crd input{
     padding: 9px 3%;
     width: 85%;
-    color: #fff;
+    /* color: #fff; */
     border: none;
    box-shadow: 0 1px 1px 0 #bbb9b9;
     background-color: transparent;
@@ -49,5 +51,62 @@
   }
   #su{
     width: 50%;
+  }
+  .pencil{
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+  }
+  
+  .pencil i{
+    opacity: .5;
+    font-size: 11px;
+  }
+  
+  .parentcircle{
+    position: relative;
+  }
+  
+  .parentcircle:hover .pencil{
+    opacity: 1;
+  }
+  
+  #uploadpic{
+    position: relative;
+    /* display: none; */
+  }
+
+  .image{
+    width: 8vw;
+    height: 8vw;
+    border-radius: 50%;
+    border: 4px solid #c78c8cd1;
+    overflow: hidden;
+  }
+  
+  .image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .flex{
+    display: flex;
+    gap: 20px;
+  }
+  
+  .post textarea{
+    height: 100px !important;
+    resize: none;
+    font-weight: 600;
   }
   

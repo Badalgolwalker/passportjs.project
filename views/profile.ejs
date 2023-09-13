@@ -1,31 +1,64 @@
-<% include ./partials/header %>
-      <div class="container d-flex mx-3 p-2">
-        <img height="140px" width="140px"  class="rounded-circle" src="<%= founduser.image %>" alt="">
-     <div class="content m-3">
-        <h2><%= founduser.username %></h2>
-        <h4>kuch karta he</h4>
-     </div>
+<% include ./partials/header.ejs %>
+  <form id="uploadpic" action="/upload" method="post" enctype="multipart/form-data">
+    <input id="fileinp" type="file" name="image">
+  </form>
+  <div class="container py-3">
+    <div class="d-flex">
+      <h4 class="mb-4">Profile</h4>
     </div>
-     <form action="/post" class="col-6 m-3" method="post">
-        <h3>Create Post</h3>
-        <hr>
-        <div class="form-floating">
-            <textarea class="form-control" name="post" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-            <label for="floatingTextarea">Comments</label>
-          </div>
-          <input type="submit" class="btn btn-primary my-3">
-     </form>
-     <div class="container m-3">
-    <% founduser.posts.forEach(function(post){ %>
-      <div class="card" style="width: 18rem;">
-        <img src="<%= founduser.image %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%= founduser.username %></h5>
-          <p class="card-text"><%= post.data %></p>
-          <p class="card-text"><%= post.likes.length %> likes</p>
-          <a href="/like/<%= post._id %>" class="btn <%= post.likes.indexOf(founduser._id) === -1 ? 'btn-primary' : 'btn-danger' %>"><%= post.likes.indexOf(founduser._id) === -1 ? "like" : "unlike" %></a>
+    <div class="flex">
+      <div class="parentcircle">
+        <div class="pencil"><i class="ri-pencil-line"></i></div>
+        <div class="image">
+          <img src="../images/uploads/<%= founduser.image %>" alt="">
         </div>
       </div>
-   <% }) %>
-     </div>
-   <% include ./partials/footer %>
+      <div>
+        <h4 style="text-transform: capitalize;">
+          <%= founduser.username %>
+        </h4>
+        <h6 style="font-weight: 400; margin-top: -5px;">kuchh karta hai</h6>
+      </div>
+    </div>
+    <div class="post mt-4 container-md">
+      <h6>Create a new post.</h6>
+      <div class="row">
+        <div class="col-6">
+          <form action="/post" method="post">
+            <div class="form-floating">
+              <textarea name="post" class="form-control" placeholder="Leave a comment here"
+                id="floatingTextarea"></textarea>
+              <label for="floatingTextarea">What's on your mind ?</label>
+            </div>
+            <button type="submit" class="mt-3 btn btn-primary">Create Post</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-4">
+      <h6 class="mb-3">All Posts By You.</h6>
+      <% founduser.posts.reverse().forEach(function(post){ %>
+        <div class="card mt-3" style="width: 45rem;">
+          <div class="card-body">
+            <h5 class="card-title">@<%= foundUser.username %>
+            </h5>
+            <p class="card-text">
+              <%= post.data %>
+            </p>
+            <p style="font-weight: 600;" class="text-primary"><%= post.likes.length %> Likes</p>
+            <a href="/like/<%= post._id %>" class="btn <%= post.likes.indexOf(foundUser.id) === -1 ? 'btn-primary' : 'btn-danger' %>"><%= post.likes.indexOf(foundUser.id) === -1 ? "Like" : "Unlike" %></a>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+  </div>
+  <script>
+    document.querySelector(".pencil").addEventListener("click",function(){
+     document.querySelector("#fileinp").click()
+    })
+    document.querySelector("#fileinp").addEventListener("change",function(){
+      document.querySelector("#uploadpic").submit()
+    })
+  </script>
+  <% include ./partials/footer.ejs %>

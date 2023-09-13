@@ -4,12 +4,42 @@ const userModel = require("./users")
 const postModel = require("./posts")
 const localStrategy = require("passport-local");
 const passport = require('passport');
+const path = require('path');
+const multer = require('multer');
+const fs = require("fs")
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images/uploads')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9) + path.extname(file.originalname)
+    cb(null, file.fieldname + '-' + uniqueSuffix)
+  }
+})
 
+const upload = multer({ storage: storage})
 passport.use(new localStrategy(userModel.authenticate()))
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
+});
+router.post("/upload", isLoggedIn, upload.single("image"), function (req, res, next) {
+  userModel.findOne({ username: req.session.passport.user })
+    .then(function (founduser) {
+      if (founduser.image && founduser.image !== "def.png") {
+        fs.unlinkSync(`./public/images/uploads/${founduser.image}`);
+      }
+      founduser.image = req.file.filename;
+      founduser.save()
+        .then(function () {
+          res.redirect("back");
+        })
+        .catch(function (err) {
+          console.error(err);
+          res.status(500).send("Kuch samasya aayi, kripya dubara koshish karein.");
+        });
+    });
 });
 
 router.post('/register', function(req, res, next) {
