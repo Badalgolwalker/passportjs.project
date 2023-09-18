@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+  <div class="crd">
+    <img src="https://imgs.search.brave.com/kXAcsJx-tNK54dHkAeWkyXzogN3Jj86up7v3csmwlIA/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS12ZWN0/b3IvaHItbG9nby1k/ZXNpZ25fODM5NTYy/LTQyLmpwZz9zaXpl/PTYyNiZleHQ9anBn" alt="">
+    <form action="/update" method="post">
+      <input id="inp" type="text" name="username" placeholder="Username" value="<%= found.username %>">
+    
+      <input type="age" name="age" placeholder="Age" value="<%= found.age %>">
+      <input type="email" name="email" placeholder="Email" disabled value="<%= found.email %>">
+      <input id="submit" type="submit">
+    </form>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    var inp = document.querySelector("#inp")
+    inp.addEventListener("input",function(){
+    if(inp.value.length > 0){
+      axios.get(`/check/${inp.value}`)
+      .then(function(data){
+       if(data.data){
+        inp.style.outlineColor = "red"
+        document.querySelector("#submit").setAttribute("disabled",true)
+       }else{
+        inp.style.outlineColor = "blue"
+        document.querySelector("#submit").removeAttribute("disabled",false)
+
+
+       }
+      })
+    }
+    })
+  </script>
+</body>
+</html>

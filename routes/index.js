@@ -41,7 +41,32 @@ router.post("/upload", isLoggedIn, upload.single("image"), function (req, res, n
         });
     });
 });
-
+router.get('/edit',isLoggedIn,function(req,res,next){
+  userModel.findOne({username:req.session.passport.user})
+  .then(function(found){
+    res.render("edit",{found})
+  })
+})
+router.get(`/check/:username`,function(req,res,next){
+  userModel.findOne({username:req.params.username})
+  .then(function(user){
+  if(user){
+    res.json(true)
+  }
+  else{
+    res.json(false)
+  }
+  })
+})
+// router.post("/update",isLoggedIn,function(req,res,next){
+//   userModel.findOneAndUpdate({username:req.session.passport.user},{
+//     username:req.body.username,
+//     age:req.body.age
+//   },{new:true})
+//   .then(function(updateduser){
+//     res.redirect("/profile")
+//   })
+// })
 router.post('/register', function(req, res, next) {
   userModel.findOne({ username: req.body.username })
     .then(function(found) {
