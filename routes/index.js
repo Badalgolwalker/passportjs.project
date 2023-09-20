@@ -58,6 +58,18 @@ router.get(`/check/:username`,function(req,res,next){
   }
   })
 })
+router.post('/update',isLoggedIn,function(req,res,next){
+  userModel.findOneAndUpdate({username:req.session.passport.user},{username:req.body.username},{new:true})
+  .then(function(updateduser){
+    req.login(updateduser,function(err){
+      if(err){
+        return next(err)
+      }else{
+        return res.redirect('/profile')
+      }
+    })
+  })
+})
 // router.post("/update",isLoggedIn,function(req,res,next){
 //   userModel.findOneAndUpdate({username:req.session.passport.user},{
 //     username:req.body.username,
